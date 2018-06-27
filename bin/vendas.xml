@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<venda>
+	<formaDePagamento>Cartao</formaDePagamento>
+	<produtos>
+		<produto>
+			<nome>Livro de xml</nome>
+			<preco>29.90</preco>
+		</produto>
+		<produto>
+			<nome>Livro de O.O</nome>
+			<preco>29.90</preco>
+		</produto>
+	</produtos>
+</venda>
