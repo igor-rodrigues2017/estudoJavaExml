@@ -2,6 +2,10 @@ package br.com.rodrigues.xmljava.Teste;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,7 +21,7 @@ import br.com.rodrigues.xmljava.Model.Produto;
  *
  */
 
-public class LerXMLComDOM {
+public class LerXMLComDOMComXpath {
 	public static void main(String[] args) throws Exception {
 		DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
 		fabrica.setValidating(true);
@@ -28,7 +32,11 @@ public class LerXMLComDOM {
 		DocumentBuilder builder = fabrica.newDocumentBuilder();
 		Document document = builder.parse("src/vendas.xml");
 
-		NodeList produtos = document.getElementsByTagName("produto");
+		String exp = "venda/produtos/produto[contains(nome,'O.O')]";
+		XPath path = XPathFactory.newInstance().newXPath();
+		XPathExpression expression = path.compile(exp);
+
+		NodeList produtos = (NodeList) expression.evaluate(document, XPathConstants.NODESET);
 		Element venda = document.getDocumentElement();
 		String moeda = venda.getAttribute("moeda");
 		System.out.println("moeda: " + moeda + "\n");
@@ -38,7 +46,6 @@ public class LerXMLComDOM {
 			double preco = Double.parseDouble(produto.getElementsByTagName("preco").item(0).getTextContent());
 			Produto prod = new Produto(nome, preco);
 			System.out.println(prod);
-			System.out.println("Inexiste Documento - Verifique o caminho");
 		}
 	}
 }

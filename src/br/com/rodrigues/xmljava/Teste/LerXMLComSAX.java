@@ -26,6 +26,5 @@ public class LerXMLComSAX {
 		
 		System.out.println(logica.getProdutos());
 		
-		
 	}
 }
